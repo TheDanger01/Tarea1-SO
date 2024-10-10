@@ -4,7 +4,7 @@ En consola colocar y ejecutar con el siguiente comando:
 
 Luego de eso apareceran los archivos ya compilados para proceder a su ejecucion.
 
-El archivo de interes sera el que quede como tarea1 y sera el que se tendra que ejecutar
+El archivo de interes sera el que quede como tarea1 y sera el que se tendra que ejecutar.
 
 # 2 Ejecutar:
 Para la ejecucion tendra el siguiente formato:
