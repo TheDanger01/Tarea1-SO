@@ -23,7 +23,8 @@ void correrAuto(int id, int M, std::vector<int>& resultados) {
         int avance = distanciaDist(gen);
         distanciaRecorrida += avance;
         if (distanciaRecorrida > M) {
-            distanciaRecorrida = M; // Limitar para que no exceda la meta
+            avance -= (distanciaRecorrida - M); // Ajustar el avance para que no exceda la meta
+            distanciaRecorrida = M;
         }
 
         // Imprimir progreso en la consola
@@ -40,10 +41,10 @@ void correrAuto(int id, int M, std::vector<int>& resultados) {
     // Almacenar el resultado final (llegada) y asignar puesto
     {
         std::lock_guard<std::mutex> lock(mtx);
-        resultados.push_back(id);
-        std::cout << "\033[1;32mAuto" << id << " avanza " << (M - distanciaRecorrida)
-                  << " metros y termina la carrera en el lugar " << puestoActual << "!\033[0m\n";
-        puestoActual++; // Incrementar el puesto para el proximo auto que termine
+        std::cout << "Auto" << id << " termina la carrera en el lugar "
+                  << puestoActual << "!\n";
+        resultados.push_back(id);  // Guardar el ID en el orden de llegada
+        puestoActual++; // Incrementar el puesto para el próximo auto que termine
     }
 }
 
@@ -74,6 +75,7 @@ int main(int argc, char* argv[]) {
 
     // Mostrar resultados finales en forma de tabla
     std::cout << "\nLugar\tAuto\n";
+    std::cout << "-----------------\n";
     for (size_t i = 0; i < resultados.size(); ++i) {
         std::cout << (i + 1) << "\tAuto" << resultados[i] << "\n";
     }
